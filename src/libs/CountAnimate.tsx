@@ -7,7 +7,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import * as styles from './CountAnimate.css.ts';
 
 // types
-import type { ArrayUnion } from '@/global.d.ts';
+import type { ArrayUnion } from '../global.d.ts';
 
 const zeroToNine = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 

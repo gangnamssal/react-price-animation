@@ -25,7 +25,4 @@ export default defineConfig({
     },
   },
   plugins: [react(), vanillaExtractPlugin({ identifiers: ({ hash }) => `prefix_${hash}` }), dts()],
-  resolve: {
-    alias: [{ find: '@', replacement: '/src' }],
-  },
 });
