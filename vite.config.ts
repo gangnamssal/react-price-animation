@@ -8,7 +8,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/libs/index.ts'),
+      entry: path.resolve(__dirname, 'src/libs/index.tsx'),
       name: 'index',
       fileName: 'index',
     },
