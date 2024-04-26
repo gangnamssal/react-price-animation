@@ -1,1 +1,1 @@
-export { default as Count } from '@/libs/CountAnimate';
+export { default as Count } from './CountAnimate.tsx';
