@@ -19,6 +19,7 @@ type CountAnimateProps = {
   height?: string;
   startDirection?: 'left' | 'right';
   comma?: boolean;
+  initialAnimation?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 export default function Count({
   number = 12345,
@@ -26,6 +27,7 @@ export default function Count({
   height = '20px',
   startDirection = 'right',
   comma = true,
+  initialAnimation = true,
   ...props
 }: CountAnimateProps) {
   const firstRender = useRef(true);
@@ -61,7 +63,7 @@ export default function Count({
             {numbers.map(number => (
               <span
                 className={
-                  firstRender.current
+                  firstRender.current && initialAnimation
                     ? styles.number({
                         number: parseInt(srtNum) as ArrayUnion<typeof zeroToNine>,
                         delay: 'delay',
