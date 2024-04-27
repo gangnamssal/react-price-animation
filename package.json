@@ -12,7 +12,7 @@
     "number-animation",
     "react-price-animation"
   ],
-  "homepage": "https://github.com/gangnamssal/react-price-animation",
+  "homepage": "https://react-price-animation.vercel.app/?path=/docs/count--docs",
   "bugs": {
     "url": "https://github.com/gangnamssal/react-price-animation/issues",
     "email": "24691116@naver.com"
