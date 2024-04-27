@@ -7,10 +7,14 @@
     "skipLibCheck": true,
 
     "baseUrl": ".",
+    "paths": {
+      "@libs/*": ["src/libs/*"],
+      "@/*": ["src/*"]
+    },
 
     /* Bundler mode */
-    // "moduleResolution": "bundler",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
+    // "moduleResolution": "Node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -31,6 +35,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/libs"],
+  "include": ["src/libs", "**/*.ts", "**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -33,4 +33,11 @@ export default defineConfig({
     dts({ insertTypesEntry: true }),
     libCss(),
   ],
+
+  resolve: {
+    alias: [
+      { find: '@libs', replacement: '/src/libs' },
+      { find: '@', replacement: '/src' },
+    ],
+  },
 });
