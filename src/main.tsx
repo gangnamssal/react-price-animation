@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom/client';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Count number={123214} startDirection='right' />
+    <Count number={12341234} comma={false} />
   </React.StrictMode>,
 );

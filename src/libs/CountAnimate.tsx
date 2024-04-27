@@ -18,12 +18,14 @@ type CountAnimateProps = {
   delay?: number;
   height?: string;
   startDirection?: 'left' | 'right';
+  comma?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 export default function Count({
   number = 12345,
   delay = 0.15,
   height = '20px',
   startDirection = 'right',
+  comma = true,
   ...props
 }: CountAnimateProps) {
   const firstRender = useRef(true);
@@ -78,7 +80,7 @@ export default function Count({
                 })}
                 key={uuidv4()}
               >
-                {addComma(pureNumString, number, index)}
+                {comma ? addComma(pureNumString, number, index) : number}
               </span>
             ))}
           </span>
