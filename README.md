@@ -1,6 +1,9 @@
 # React-price-animation
 
 은행, 이커머스 사이트 등에서 거래가 이루어질 때, 가격이나 숫자의 변동을 사용자에게 더욱 생생하게 전달하기 위해 애니메이션 효과를 적용할 수 있습니다.
+<p align="center">
+  <img src="https://github.com/gangnamssal/react-price-animation/assets/110574860/f90a3c65-8fb7-41d8-858a-10d4c7672dbe" width="300px">
+</p>
 
 ## Install
 
