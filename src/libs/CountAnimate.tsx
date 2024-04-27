@@ -17,11 +17,13 @@ type CountAnimateProps = {
   number: number | string;
   delay?: number;
   height?: string;
+  startDirection?: 'left' | 'right';
 } & HTMLAttributes<HTMLDivElement>;
-export default function CountAnimate({
+export default function Count({
   number = 12345,
   delay = 0.15,
   height = '20px',
+  startDirection = 'right',
   ...props
 }: CountAnimateProps) {
   const firstRender = useRef(true);
@@ -67,7 +69,10 @@ export default function CountAnimate({
                     : styles.number({ change: 'change', delay: 'delay' })
                 }
                 style={assignInlineVars(styles.countAnimateVars, {
-                  delay: `${delay * (pureNumString.length - index)}s`,
+                  delay:
+                    startDirection == 'left'
+                      ? `${delay * index}s`
+                      : `${delay * (pureNumString.length - index)}s`,
                   translateY: `${-currentNum * 100}%`,
                   fromTranslateY: `${-prevNum * 100}%`,
                 })}
