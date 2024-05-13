@@ -1,1 +1,1 @@
-export { default as Count } from './CountAnimate.tsx';
+export { default as Count } from './CountAnimate.client.tsx';

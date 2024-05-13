@@ -1,5 +1,5 @@
 // stories
-import CountAnimate from './CountAnimate.tsx';
+import CountAnimate from './CountAnimate.client.tsx';
 
 const meta = {
   component: CountAnimate,

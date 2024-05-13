@@ -1,5 +1,5 @@
 import { useState, useMemo, HTMLAttributes, Dispatch, SetStateAction } from 'react';
-import CountAnimate from './CountAnimate.tsx';
+import CountAnimate from './CountAnimate.client.tsx';
 
 type Options = { delay: number; height: string };
 type UseCountArgs = { initialCount: number | string; options?: Partial<Options> };
