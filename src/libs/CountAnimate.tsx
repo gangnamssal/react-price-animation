@@ -1,3 +1,5 @@
+'use client';
+
 // library
 import { v4 as uuidv4 } from 'uuid';
 import { HTMLAttributes, useEffect, useRef } from 'react';
@@ -69,8 +71,8 @@ export default function Count({
                         delay: 'delay',
                       })
                     : isEqual
-                    ? styles.number({ change: 'noChange', delay: 'delay' })
-                    : styles.number({ change: 'change', delay: 'delay' })
+                      ? styles.number({ change: 'noChange', delay: 'delay' })
+                      : styles.number({ change: 'change', delay: 'delay' })
                 }
                 style={assignInlineVars(styles.countAnimateVars, {
                   delay:
