@@ -208,8 +208,9 @@ const numberNoChangeAnimation = keyframes({
 
 export const numberWrap = style({
   display: 'inline-block',
-  verticalAlign: 'bottom',
+  verticalAlign: 'middle',
   height: heightVars.height,
+  lineHeight: heightVars.height,
   overflow: 'hidden',
 });
 
