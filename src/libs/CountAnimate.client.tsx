@@ -2,8 +2,8 @@
 
 // library
 import { v4 as uuidv4 } from 'uuid';
-import { HTMLAttributes, useEffect, useRef } from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { HTMLAttributes, memo, useEffect, useRef } from 'react';
 
 // stories
 import * as styles from './CountAnimate.css.ts';
@@ -23,7 +23,8 @@ type CountAnimateProps = {
   comma?: boolean;
   initialAnimation?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
-export default function Count({
+
+const Count = memo(function Count({
   number = 12345,
   delay = 0.15,
   height = '20px',
@@ -34,6 +35,7 @@ export default function Count({
 }: CountAnimateProps) {
   const firstRender = useRef(true);
   const numberStore = useRef<number | string>(number);
+  const keysRef = useRef<string[]>([]);
 
   useEffect(() => {
     numberStore.current = number;
@@ -49,6 +51,9 @@ export default function Count({
       ? numberStore.current.replace(/,/g, '')
       : numberStore.current.toString();
 
+  if (keysRef.current.length !== pureNumString.length)
+    keysRef.current = pureNumString.split('').map(() => uuidv4());
+
   return (
     <div {...props}>
       {pureNumString.split('').map((srtNum, index) => {
@@ -60,7 +65,7 @@ export default function Count({
           <span
             className={styles.numberWrap}
             style={assignInlineVars(styles.heightVars, { height })}
-            key={Math.random() * parseInt(srtNum) + index}
+            key={keysRef.current[index]}
           >
             {numbers.map(number => (
               <span
@@ -92,7 +97,7 @@ export default function Count({
       })}
     </div>
   );
-}
+});
 
 // 숫자 or 123,000 같은 문자 형식을 체크하는 함수
 function isNumericOrFormattedString(value: any): value is number | string {
@@ -109,3 +114,5 @@ function addComma(pureNumString: string, number: number, index: number) {
 
   return number;
 }
+
+export default Count;
