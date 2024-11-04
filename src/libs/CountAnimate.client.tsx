@@ -1,9 +1,7 @@
-'use client';
-
 // library
 import { v4 as uuidv4 } from 'uuid';
+import { HTMLAttributes, useEffect, useRef } from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { HTMLAttributes, memo, useEffect, useRef } from 'react';
 
 // stories
 import * as styles from './CountAnimate.css.ts';
@@ -24,7 +22,16 @@ type CountAnimateProps = {
   initialAnimation?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 
-const Count = memo(function Count({
+/**
+ * @param number - 숫자 or 123,000 같은 문자 형식만 가능합니다.
+ * @param delay - 숫자가 변경되는 딜레이 시간입니다. (default: 0.15)
+ * @param height - 숫자의 높이를 지정합니다. (default: 20px)
+ * @param startDirection - 숫자가 변경되는 방향을 지정합니다. (default: right)
+ * @param comma - 숫자에 ,를 추가할지 여부를 지정합니다. (default: true)
+ * @param initialAnimation - 초기 애니메이션을 실행할지 여부를 지정합니다. (default: true)
+ * @returns
+ */
+export default function Count({
   number = 12345,
   delay = 0.15,
   height = '20px',
@@ -40,6 +47,20 @@ const Count = memo(function Count({
   useEffect(() => {
     numberStore.current = number;
     firstRender.current = false;
+  }, [number]);
+
+  useEffect(() => {
+    const element = document.getElementById('element');
+
+    if (element) {
+      element.style.willChange = 'transform';
+
+      element.classList.add('animate');
+
+      setTimeout(() => {
+        element.style.willChange = 'auto';
+      }, 200);
+    }
   }, [number]);
 
   if (number && !isNumericOrFormattedString(number))
@@ -66,6 +87,7 @@ const Count = memo(function Count({
             className={styles.numberWrap}
             style={assignInlineVars(styles.heightVars, { height })}
             key={keysRef.current[index]}
+            id='element'
           >
             {numbers.map(number => (
               <span
@@ -97,7 +119,7 @@ const Count = memo(function Count({
       })}
     </div>
   );
-});
+}
 
 // 숫자 or 123,000 같은 문자 형식을 체크하는 함수
 function isNumericOrFormattedString(value: any): value is number | string {
@@ -114,5 +136,3 @@ function addComma(pureNumString: string, number: number, index: number) {
 
   return number;
 }
-
-export default Count;
