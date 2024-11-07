@@ -1,5 +1,4 @@
 // library
-import { v4 as uuidv4 } from 'uuid';
 import { HTMLAttributes, useEffect, useRef } from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
@@ -42,7 +41,6 @@ export default function Count({
 }: CountAnimateProps) {
   const firstRender = useRef(true);
   const numberStore = useRef<number | string>(number);
-  const keysRef = useRef<string[]>([]);
 
   useEffect(() => {
     numberStore.current = number;
@@ -67,13 +65,11 @@ export default function Count({
     return <p>'숫자 or 123,000 같은 문자 형식만 가능합니다.'</p>;
 
   const pureNumString = typeof number == 'string' ? number.replace(/,/g, '') : number.toString();
+
   const pureNumberStoreString =
     typeof numberStore.current == 'string'
       ? numberStore.current.replace(/,/g, '')
       : numberStore.current.toString();
-
-  if (keysRef.current.length !== pureNumString.length)
-    keysRef.current = pureNumString.split('').map(() => uuidv4());
 
   return (
     <div {...props}>
@@ -86,10 +82,10 @@ export default function Count({
           <span
             className={styles.numberWrap}
             style={assignInlineVars(styles.heightVars, { height })}
-            key={keysRef.current[index]}
+            key={`${srtNum}-${index}`}
             id='element'
           >
-            {numbers.map(number => (
+            {numbers.map((number, numIndex) => (
               <span
                 className={
                   firstRender.current && initialAnimation
@@ -109,7 +105,7 @@ export default function Count({
                   translateY: `${-currentNum * 100}%`,
                   fromTranslateY: `${-prevNum * 100}%`,
                 })}
-                key={uuidv4()}
+                key={`num-${index}-${numIndex}`}
               >
                 {comma ? addComma(pureNumString, number, index) : number}
               </span>
