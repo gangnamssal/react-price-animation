@@ -28,7 +28,6 @@ type CountAnimateProps = {
  * @param startDirection - 숫자가 변경되는 방향을 지정합니다. (default: right)
  * @param comma - 숫자에 ,를 추가할지 여부를 지정합니다. (default: true)
  * @param initialAnimation - 초기 애니메이션을 실행할지 여부를 지정합니다. (default: true)
- * @returns
  */
 export default function Count({
   number = 12345,
@@ -55,9 +54,11 @@ export default function Count({
 
       element.classList.add('animate');
 
-      setTimeout(() => {
+      const TIME = setTimeout(() => {
         element.style.willChange = 'auto';
       }, 200);
+
+      return () => clearTimeout(TIME);
     }
   }, [number]);
 
@@ -72,7 +73,7 @@ export default function Count({
       : numberStore.current.toString();
 
   return (
-    <div {...props}>
+    <div key={number} {...props}>
       {pureNumString.split('').map((srtNum, index) => {
         const isEqual = srtNum === pureNumberStoreString[index];
         const currentNum = Number(srtNum);
@@ -80,10 +81,10 @@ export default function Count({
 
         return (
           <span
+            id='element'
             className={styles.numberWrap}
             style={assignInlineVars(styles.heightVars, { height })}
-            key={`${srtNum}-${index}`}
-            id='element'
+            key={`${pureNumString}-${index}`}
           >
             {numbers.map((number, numIndex) => (
               <span
@@ -105,7 +106,7 @@ export default function Count({
                   translateY: `${-currentNum * 100}%`,
                   fromTranslateY: `${-prevNum * 100}%`,
                 })}
-                key={`num-${index}-${numIndex}`}
+                key={`${pureNumString}-${index}-${numIndex}`}
               >
                 {comma ? addComma(pureNumString, number, index) : number}
               </span>
